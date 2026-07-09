@@ -20,6 +20,11 @@ app.get('/', async(req, res) =>{
 
 app.get('/fruits', async(req,res)=> {
     
+    let allReadyToEat = await Fruit.find({isReadyToEat : true})
+
+
+    
+    res.send(allReadyToEat)
 })
 
 app.listen(3000, () => {
@@ -29,9 +34,18 @@ app.listen(3000, () => {
 
 //code graveyard ==================================>
 
+    // creating a fruit
     // const fruitData = {}
     // fruitData.name = 'peach'
     // fruitData.isReadyToEat = false
 
     // let createdFruit = await Fruit.create(fruitData)
-    // res.send(createdFruit)
+
+    // finding all fruits
+    // let allFruits = await Fruit.find()
+
+    // finding a fruit like only 'Melon'
+    // let allMelons = await Fruit.find({name:'Melon'})
+
+    // finding all ready fruits 'true '
+    // let allReadyToEat = await Fruit.find({isReadyToEat : true})
