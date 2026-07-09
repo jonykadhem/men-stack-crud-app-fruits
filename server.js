@@ -20,7 +20,8 @@ app.get('/', async(req, res) =>{
 
 app.get('/fruits', async(req,res)=> {
     
-    let allReadyToEat = await Fruit.find({isReadyToEat : true})
+    let allReadyToEat = await Fruit.findByIdAndDelete(
+        '6a4f6a3f46b63d65e46d31e6',)
 
 
     
@@ -49,3 +50,25 @@ app.listen(3000, () => {
 
     // finding all ready fruits 'true '
     // let allReadyToEat = await Fruit.find({isReadyToEat : true})
+
+    // to find and update item in object 
+    // let allReadyToEat = await Fruit.findOneAndUpdate({name : 'Melon'}, 
+        // {name: 'Pineapple'}, {new: true})
+
+
+    // to find by id and update content
+    // let allReadyToEat = await Fruit.findByIdAndUpdate(
+    //     '6a4f6a3f46b63d65e46d31e6', 
+    //     {name: 'Green Apple'}, {new: true})
+
+    // to delet by id
+    //  let allReadyToEat = await Fruit.findByIdAndDelete(
+    //     '6a4f6a3f46b63d65e46d31e6',)
+
+    // to delet by name or anything else 
+    //      let allReadyToEat = await Fruit.findOneAndDelete(
+    //     '6a4f6a3f46b63d65e46d31e6',)
+
+    // to delet all 
+    //  let allReadyToEat = await Fruit.deleteMany(
+    //     '6a4f6a3f46b63d65e46d31e6',)
