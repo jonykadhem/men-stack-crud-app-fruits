@@ -7,7 +7,7 @@ const app = express();
 app.use(morgan('div'))
 
 app.get('/', async(req, res) =>{
-    res.send('hello potatto')
+    res.render('home.ejs')
 })
 
 app.listen(3000, () => {
