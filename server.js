@@ -6,6 +6,9 @@ const express = require('express')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 const Fruit = require('./models/fruit.js')
+const path = require('path')
+
+
 
 mongoose.connect(process.env.MONGODB_URI)
 mongoose.connection.on('connected',()=>{
@@ -13,19 +16,32 @@ mongoose.connection.on('connected',()=>{
 })
 const app = express()
 app.use(morgan('div'))
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "public")))
 
+
+//Home
 app.get('/', async(req, res) =>{
     res.render('home.ejs')
 })
 
-app.get('/fruits', async(req,res)=> {
-    
-    let allReadyToEat = await Fruit.findByIdAndDelete(
-        '6a4f6a3f46b63d65e46d31e6',)
+// Get /fruits/new for creating fruit
+app.get('/fruits/new', async(req,res)=> {
+    res.render('new.ejs')
+})
+app.post('/fruits', async (req,res) => {
+    const fruitData = {}
 
+    fruitData.name = req.body.name
+    if (req.body.isReadyToEat === 'on') {
+        fruitData.isReadyToEat = true
+    } else {
+        fruitData.isReadyToEat = false        
+    }
 
-    
-    res.send(allReadyToEat)
+    let createdFruit = await Fruit.create(fruitData)
+
+ res.send(createdFruit)
 })
 
 app.listen(3000, () => {
