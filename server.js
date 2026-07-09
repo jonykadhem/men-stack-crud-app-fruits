@@ -41,7 +41,7 @@ app.post('/fruits', async (req,res) => {
 
     let createdFruit = await Fruit.create(fruitData)
 
- res.send(createdFruit)
+ res.redirect('/')
 })
 
 app.listen(3000, () => {
