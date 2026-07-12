@@ -35,6 +35,8 @@ app.post('/fruits', async (req,res) => {
     const fruitData = {}
 
     fruitData.name = req.body.name
+    fruitData.category = req.body.category
+
     if (req.body.isReadyToEat === 'on') {
         fruitData.isReadyToEat = true
     } else {
@@ -77,14 +79,18 @@ app.get('/fruits/:fruitId/edit', async(req,res) => {
 })
 
 app.put('/fruits/:fruitId', async(req, res) => {
-    //  const fruitData = {}
+     const fruitData = {}
+    fruitData.category = req.body.category
 
     if(req.body.isReadyToEat === 'on'){
         req.body.isReadyToEat = true
     }else {
         req.body.isReadyToEat = false
     }
-    let updateFruits = await Fruit.findByIdAndUpdate(req.params.fruitId, req.body,{new:true})
+    let updateFruits = await Fruit.findByIdAndUpdate(
+        req.params.fruitId, req.body,{new:true, runValidators: true
+
+        })
     res.redirect(`/fruits/${req.params.fruitId}`)
 })
 

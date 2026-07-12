@@ -9,6 +9,52 @@
             <input type="text" id="name" name="name" value="<%= foundFruit.name %>">
         </div>
         <br>
+        <label for="category">Category:</label>
+
+<select name="category" id="category" required>
+    <option
+        value="citrus"
+        <%= foundFruit.category === 'citrus' ? 'selected' : '' %>
+    >
+        Citrus
+    </option>
+
+    <option
+        value="berry"
+        <%= foundFruit.category === 'berry' ? 'selected' : '' %>
+    >
+        Berry
+    </option>
+
+    <option
+        value="tropical"
+        <%= foundFruit.category === 'tropical' ? 'selected' : '' %>
+    >
+        Tropical
+    </option>
+
+    <option
+        value="stone-fruit"
+        <%= foundFruit.category === 'stone-fruit' ? 'selected' : '' %>
+    >
+        Stone Fruit
+    </option>
+
+    <option
+        value="melon"
+        <%= foundFruit.category === 'melon' ? 'selected' : '' %>
+    >
+        Melon
+    </option>
+
+    <option
+        value="other"
+        <%= foundFruit.category === 'other' ? 'selected' : '' %>
+    >
+        Other
+    </option>
+</select>
+<br>
         
         <div class="checkbox-div">
             <label for="isReadyToEat">Is Ready To Eat?</label>
