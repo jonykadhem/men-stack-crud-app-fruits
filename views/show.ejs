@@ -1,0 +1,24 @@
+<%- include('./partials/nav') %>
+
+<h1><%= foundFruit.name %></h1>
+
+<p>Name: <%= foundFruit.name %></p>
+
+<% if (foundFruit.isReadyToEat) { %>
+    <p>this fruit is ready for you to eat 🎉</p>
+ 
+<% }else {%>
+    <p>this fruit is not ready yat 😢</p>
+
+<%} %>
+<form action="/fruits/<%= foundFruit._id %>?_method=DELETE" method="post">
+
+    <button type="submit" class="delete">Delete</button>
+</form>
+
+
+    <a href="/fruits/<%= foundFruit._id %>/edit"><button type="submit" class="edit">Edit</button></a>
+
+
+</body>
+</html>

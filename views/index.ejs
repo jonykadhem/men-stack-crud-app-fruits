@@ -1,0 +1,17 @@
+<%- include('./partials/nav') %>
+
+<h1>All Fruits</h1>
+<hr>
+<% allFruits.forEach(element => { %>
+    <a href="/fruits/<%= element._id %>"> 
+    <div class="allFruits">
+        
+            <p><%= element.name %></p>
+            
+        </div>
+    </a>
+        
+        
+<% }) %>
+</body>
+</html>

@@ -7,6 +7,7 @@ const morgan = require('morgan')
 const mongoose = require('mongoose')
 const Fruit = require('./models/fruit.js')
 const path = require('path')
+const methodOverride = require('method-override')
 
 
 
@@ -17,6 +18,7 @@ mongoose.connection.on('connected',()=>{
 const app = express()
 app.use(morgan('div'))
 app.use(express.urlencoded({ extended: false }));
+app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, "public")))
 
 
@@ -41,7 +43,49 @@ app.post('/fruits', async (req,res) => {
 
     let createdFruit = await Fruit.create(fruitData)
 
- res.redirect('/')
+ res.redirect('/fruits')
+})
+// showing all item
+app.get('/fruits', async(req,res) => {
+    let allFruits = await Fruit.find()
+    // console.log(allFruits)
+    res.render('index.ejs', {
+        allFruits: allFruits
+    })
+})
+// deleting an item
+app.get('/fruits/:fruitId', async(req,res) =>{
+    
+    let foundFruit = await Fruit.findById(req.params.fruitId)
+    res.render('show.ejs', {
+        foundFruit : foundFruit
+
+    })
+})
+app.delete('/fruits/:fruitId', async(req, res) => {
+    let deletFruit = await Fruit.findByIdAndDelete(req.params.fruitId)
+ res.redirect('/fruits')
+})
+// editing an item
+app.get('/fruits/:fruitId/edit', async(req,res) => {
+   
+    let foundFruit = await Fruit.findById(req.params.fruitId)
+    console.log(foundFruit)
+    res.render('edit.ejs', {
+        foundFruit: foundFruit
+    })
+})
+
+app.put('/fruits/:fruitId', async(req, res) => {
+    //  const fruitData = {}
+
+    if(req.body.isReadyToEat === 'on'){
+        req.body.isReadyToEat = true
+    }else {
+        req.body.isReadyToEat = false
+    }
+    let updateFruits = await Fruit.findByIdAndUpdate(req.params.fruitId, req.body,{new:true})
+    res.redirect(`/fruits/${req.params.fruitId}`)
 })
 
 app.listen(3000, () => {

@@ -11,7 +11,7 @@ body{
     justify-content: center;
     max-width: 100vw;
 }
- form {
+ .new {
    font-family: "DM Sans", sans-serif;
    display: flex;
    flex-direction: column;
@@ -50,4 +50,23 @@ body{
 
  button:active {
    background-color: #2d4d3a;
+ }
+
+ .allFruits{
+  border: 2px solid rgb(238, 170, 237);
+  border-radius: 5px;
+  margin: 20px;
+  padding: 10px;
+ }
+ .allFruits:hover{
+  color: rgb(239, 168, 247);
+  border: 5px solid rgb(239, 168, 247);
+  box-shadow: 5px 6px rgb(239, 168, 247);
+ }
+ a{
+  text-decoration: none;
+ }
+ .delete:hover{
+  background-color: red;
+  cursor: pointer;
  }
